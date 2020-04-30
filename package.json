@@ -1,0 +1,47 @@
+{
+  "name": "temp-tracker-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/index.html --port 3000 --open",
+    "build": "parcel build src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bootbox": "^5.2.0",
+    "@types/js-cookie": "^2.2.6",
+    "@types/jwt-decode": "^2.2.1",
+    "@types/lodash": "^4.14.150",
+    "@types/node": "^13.13.4",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.7",
+    "@types/react-redux": "^7.1.7",
+    "@types/react-router-dom": "^5.1.5",
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.26.5",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bootbox": "^5.4.0",
+    "connected-react-router": "^6.8.0",
+    "jquery": "^3.5.0",
+    "js-cookie": "^2.2.1",
+    "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "popper.js": "^1.16.1",
+    "query-string": "^6.12.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-hot-loader": "^4.12.20",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.5",
+    "reselect": "^4.0.0",
+    "typesafe-actions": "^5.1.0"
+  }
+}
