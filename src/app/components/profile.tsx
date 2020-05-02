@@ -44,7 +44,6 @@ export const Profile: React.FunctionComponent = () => {
         }
         else {
             try {
-                console.log(userId);
                 await Api.User.changePassword(userId, changePassword.new, changePassword.old);
                 bootbox.alert('Your password has been updated.');
                 setChangePassword({
