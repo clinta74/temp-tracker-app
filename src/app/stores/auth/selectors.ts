@@ -12,6 +12,11 @@ export const getToken = createSelector(
     ({ token }) => token
 );
 
+export const getUserId = createSelector(
+    getStoreState,
+    ({ userId }) => (userId || 0)
+);
+
 export const getIsAuthenticated = createSelector(
     getToken,
     (token) => !!token

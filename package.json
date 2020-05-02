@@ -25,6 +25,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "@hot-loader/react-dom": "^16.13.0",
     "axios": "^0.19.2",
     "bootbox": "^5.4.0",
     "connected-react-router": "^6.8.0",
@@ -37,11 +38,14 @@
     "query-string": "^6.12.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-hot-loader": "^4.12.20",
+    "react-hot-loader": "^4.12.21",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.5",
     "reselect": "^4.0.0",
     "typesafe-actions": "^5.1.0"
+  },
+  "alias": {
+    "react-dom": "@hot-loader/react-dom"
   }
 }

@@ -5,6 +5,7 @@ import { createStore } from 'redux';
 import { createBrowserHistory } from 'history';
 import { hot } from 'react-hot-loader';
 
+// Bootstrap imports
 import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';

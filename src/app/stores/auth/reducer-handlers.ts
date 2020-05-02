@@ -3,11 +3,15 @@ import Cookie from 'js-cookie';
 import { AuthState } from './reducers';
 import { config } from '../../../config';
 
-export const setToken = (state: AuthState, token: string): AuthState => {
+export const setToken = (state: AuthState, payload: { token: string, userId: number }): AuthState => {
+  const { token, userId } = payload;
   Cookie.set(config.TOKEN_COOKIE, token);
+
+  console.log('Setting token', payload);
   return {
     ...state,
-    token
+    token,
+    userId,
   };
 };
 
@@ -16,5 +20,6 @@ export const logout = (state: AuthState): AuthState => {
   return {
     ...state,
     token: false,
+    userId: undefined,
   };
 };
