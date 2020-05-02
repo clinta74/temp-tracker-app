@@ -7,7 +7,6 @@ export const setToken = (state: AuthState, payload: { token: string, userId: num
   const { token, userId } = payload;
   Cookie.set(config.TOKEN_COOKIE, token);
 
-  console.log('Setting token', payload);
   return {
     ...state,
     token,
