@@ -25,7 +25,7 @@ export const AddReading: React.FunctionComponent = () => {
     return (
         <div className="row justify-content-center form-group">
             <div className="col-md-6">
-                <div className="card shadow-sm w-50">
+                <div className="card shadow-sm">
                     <div className="card-header">
                         <span className="font-weight-bold">Add</span>
                     </div>
