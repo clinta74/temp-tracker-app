@@ -32,7 +32,6 @@ export const Login: React.FunctionComponent = () => {
             Api.Auth.login(username.trim(), password.trim())
                 .then(({ data }) => {
                     const unblock = history.block();
-                    console.log('Data', data);
                     dispatch(setToken(data));
                     unblock();
                     history.replace(redirect);
