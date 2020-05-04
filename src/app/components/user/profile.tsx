@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import bootbox from 'bootbox';
 
-import { getDecoded, getUserId } from '../stores/auth/selectors';
-import { Api } from '../api';
+import { getDecoded, getUserId } from '../../stores/auth/selectors';
+import { Api } from '../../api';
 
 interface ChangePassword {
     old: string;

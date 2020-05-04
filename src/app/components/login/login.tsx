@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 import bootbox from 'bootbox';
-import { Api } from '../api';
+import { Api } from '../../api';
 import { useDispatch } from 'react-redux';
-import { setToken } from '../stores/auth/actions';
+import { setToken } from '../../stores/auth/actions';
 
 export const Login: React.FunctionComponent = () => {
     const usernameInput = React.createRef<HTMLInputElement>();

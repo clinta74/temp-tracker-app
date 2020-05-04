@@ -1,7 +1,7 @@
 import React, { useState, useEffect, HtmlHTMLAttributes } from 'react';
-import { Api } from '../api';
+import { Api } from '../../api';
 import { useDispatch } from 'react-redux';
-import { addReading } from '../stores/readings/actions';
+import { addReading } from '../../stores/readings/actions';
 
 export const AddReading: React.FunctionComponent = () => {
     const dispatch = useDispatch();

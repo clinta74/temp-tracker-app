@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import moment from 'moment';
 import bootbox from 'bootbox';
-import { Api } from '../api';
+import { Api } from '../../api';
 import { useSelector, useDispatch } from 'react-redux';
-import { getReadings } from '../stores/readings/selectors';
-import { setReadings, removeReading } from '../stores/readings/actions';
+import { getReadings } from '../../stores/readings/selectors';
+import { setReadings, removeReading } from '../../stores/readings/actions';
 import { AddReading } from './add-reading';
 
-export const Dashboard: React.FunctionComponent = () => {
+export const Readings: React.FunctionComponent = () => {
     const dispatch = useDispatch();
     const readings = useSelector(getReadings);
 

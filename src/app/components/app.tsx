@@ -1,12 +1,12 @@
 import React from 'react';
-import { Route, Redirect, Switch, Link } from 'react-router-dom'
-import { Login } from '.';
+import { Route, Redirect, Switch, Link, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { getIsAuthenticated, getDecoded } from '../stores/auth/selectors';
 import { AuthorizedRoute } from './authorized-route';
+import { Readings } from './readings/readings';
+import { Login, Logout } from './login';
+import { Profile } from './user/profile';
 import { Dashboard } from './dashboard';
-import { Logout } from './logout';
-import { Profile } from './profile';
 
 export const App = () => {
 
@@ -16,21 +16,26 @@ export const App = () => {
     return (
         <div className="vh-100">
             <header className="mb-4 bg-light">
-                <div className="d-flex justify-content-between p-3 shadow-sm">
-                    <div className="mx-4">Temp Tracker</div>
-                    <div>
-                        {
-                            isAuthenticated &&
-                            <div>
-                                <Link to="/profile" className="text-capitalize">{decoded.sub}</Link>
-                                <Link to="/logout" className="mx-4">Log Out</Link>
+                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                    <Link to="/dashboard" className="navbar-brand">Temp Tracker</Link>
+                    {
+                        isAuthenticated &&
+                        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div className="navbar-nav mr-auto">
+                                <NavLink to="/dashboad" className="nav-item nav-link">Dashboard</NavLink>
+                                <NavLink to="/readings" className="nav-item nav-link">Readings</NavLink>
+                                <NavLink to="/profile" className="nav-item nav-link">Profile</NavLink>
+                                <NavLink to="/logout" className="nav-item nav-link">Log Out</NavLink>
                             </div>
-                        }
-                    </div>
-                </div>
-            </header>        <div className="container">
+                            <span className="text-capitalize">{decoded.sub}</span>
+                        </div>
+                    }
+                </nav>
+            </header>
+            <div className="container">
                 <Switch>
                     <AuthorizedRoute path="/dashboard" isAuthorized={isAuthenticated} to="/login" component={Dashboard} />
+                    <AuthorizedRoute path="/readings" isAuthorized={isAuthenticated} to="/login" component={Readings} />
                     <AuthorizedRoute path="/profile" isAuthorized={isAuthenticated} to="/login" component={Profile} />
                     <AuthorizedRoute path="/logout" isAuthorized={isAuthenticated} to="/login" component={Logout} />
                     <Route path="/login" component={Login} />
