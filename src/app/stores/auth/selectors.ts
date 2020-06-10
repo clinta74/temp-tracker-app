@@ -42,3 +42,8 @@ export const getIsExpired = createSelector(
     getDecoded,
     (token) => token && token.exp * 1000 < Date.now()
 );
+
+export const getRoles = createSelector(
+    getDecoded,
+    (token) => token ? token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] : []
+)

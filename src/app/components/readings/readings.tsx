@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getReadings } from '../../stores/readings/selectors';
 import { setReadings, removeReading } from '../../stores/readings/actions';
 import { AddReading } from './add-reading';
+import { AxiosError } from 'axios';
 
 export const Readings: React.FunctionComponent = () => {
     const dispatch = useDispatch();
@@ -13,8 +14,12 @@ export const Readings: React.FunctionComponent = () => {
 
     useEffect(() => {
         Api.Readings.get()
-            .then(({ data }) => {
+            .then(({ data, headers }) => {
+                const totalReadings = headers['X-Total-Count'];
                 dispatch(setReadings(data));
+            })
+            .catch((error: AxiosError) => {
+                bootbox.alert(`There was an error attempting to get the readings. ${error.message}`);
             });
     }, []);
 

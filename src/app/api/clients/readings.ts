@@ -7,8 +7,8 @@ export interface Reading {
     taken: string;
 }
 
-export const get = () =>
-    apiBase.client.get<Reading[]>('readings');
+export const get = (page?: number, limit?: number) =>
+    apiBase.client.get<Reading[]>('readings', { params: { page, limit}});
 
 export const getById = (readingId: string) =>
     apiBase.client.get<Reading>(`readings/${readingId}`);
