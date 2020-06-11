@@ -5,5 +5,31 @@ export interface ChangePasswordRequest {
     oldPassword: string;
 }
 
-export const changePassword = (userId: number, password: string, oldPassword: string) => 
-    apiBase.client.post(`user/${userId}/password`, { password, oldPassword });
+export interface User {
+    userId: number;
+    username: string;
+    firstname: string;
+    lastname: string;
+    created: Date | string;
+    roles?: Role[]
+}
+
+export interface Role {
+    roleId: number;
+    name: string;
+    description: string;
+}
+
+
+export const get = (page?: number, limit?: number) =>
+    apiBase.client.get<User[]>(`users`, { params: { page, limit } });
+
+export const add = (user: User) =>
+    apiBase.client.post<number>(`users`, user);
+
+export const update = (user: User) =>
+    apiBase.client.put<number>(`users`, user);
+
+export const changePassword = (userId: number, password: string, oldPassword: string) =>
+    apiBase.client.post(`users/${userId}/password`, { password, oldPassword });
+

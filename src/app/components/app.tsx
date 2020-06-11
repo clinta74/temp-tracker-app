@@ -11,7 +11,7 @@ import { AuthRoleWrapper } from './auth-role-wrapper';
 import { Dashboard } from './dashboard';
 import { Readings } from './readings';
 import { Login, Logout } from './login';
-import { Users, Profile } from './user';
+import { Users, Profile, AddUser, EditUser } from './user';
 import { ROLES } from '../constants';
 
 export const App = () => {
@@ -50,7 +50,9 @@ export const App = () => {
                 <Switch>
                     <AuthorizedRoute path="/dashboard" isAuthorized={isAuthenticated} to="/login" component={Dashboard} />
                     <AuthorizedRoute path="/readings" isAuthorized={isAuthenticated} to="/dashboard" component={Readings} />
-                    <AuthorizedRoute path="/users" isAuthorized={isAuthenticated} to="/dashboard" roles={[ROLES.ADMIN]} component={Users} />
+                    <AuthorizedRoute path="/users" exact isAuthorized={isAuthenticated} to="/dashboard" roles={[ROLES.ADMIN]} component={Users} />
+                    <AuthorizedRoute path="/users/add" isAuthorized={isAuthenticated} to="/dashboard" roles={[ROLES.ADMIN]} component={AddUser} />
+                    <AuthorizedRoute path="/users/:userid" isAuthorized={isAuthenticated} to="/dashboard" roles={[ROLES.ADMIN]} component={EditUser} />
                     <AuthorizedRoute path="/profile" isAuthorized={isAuthenticated} to="/dashboard" component={Profile} />
                     <AuthorizedRoute path="/logout" isAuthorized={isAuthenticated} to="/login" component={Logout} />
                     <Route path="/login" component={Login} />
