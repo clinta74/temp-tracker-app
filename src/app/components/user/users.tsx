@@ -1,6 +1,5 @@
 import React, { useEffect, HtmlHTMLAttributes } from 'react';
 import { Api } from '../../api';
-import { setReadings } from '../../stores/readings/actions';
 import { AxiosError } from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUsers } from '../../stores/users/actions';
