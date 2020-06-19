@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { NewUser } from '../../api/clients/user';
-import { ROLES } from '../../constants';
-import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { Api } from '../../api';
 import { AxiosError } from 'axios';
+import bootbox from 'bootbox';
+
+import { NewUser } from '../../api/clients/user';
+import { ROLES } from '../../constants';
+import { checkPasswordStrength, Strength } from '../../services/password-checker';
 
 export const AddUser: React.FunctionComponent = () => {
-    const dispatch = useDispatch();
     const history = useHistory();
     const [user, setUser] = useState<NewUser>({
         username: '',
@@ -18,6 +19,8 @@ export const AddUser: React.FunctionComponent = () => {
             ROLES.USER,
         ],
     });
+
+    const isPasswordSecure = (password: string) => checkPasswordStrength(password, Strength.medium);
 
     const onChangeUser: React.ChangeEventHandler<HTMLInputElement> = event => {
         const key = event.currentTarget.name;
@@ -32,13 +35,18 @@ export const AddUser: React.FunctionComponent = () => {
 
     const onClickAdd: React.MouseEventHandler<HTMLButtonElement> = async event => {
         if (user) {
-            Api.User.add(user)
-                .then(() => {
-                    history.push(`/users`);
-                })
-                .catch((error: AxiosError) => {
-                    bootbox.alert(`${error.message}`);
-                });
+            if (isPasswordSecure(user.password)) {
+                Api.User.add(user)
+                    .then(() => {
+                        history.push(`/users`);
+                    })
+                    .catch((error: AxiosError) => {
+                        bootbox.alert(`${error.message}`);
+                    });
+            }
+            else {
+                bootbox.alert('Password is not strong enough.')
+            }
         }
     }
 
