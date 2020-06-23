@@ -8,7 +8,6 @@ import { createReducerHandler } from '../createReducerHandler';
 
 export interface AuthState {
   token: string | false;
-  userId?: number;
 }
 
 const token = Cookie.get(config.TOKEN_COOKIE) || false;

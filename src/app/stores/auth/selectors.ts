@@ -12,11 +12,6 @@ export const getToken = createSelector(
     ({ token }) => token
 );
 
-export const getUserId = createSelector(
-    getStoreState,
-    ({ userId }) => (userId || 0)
-);
-
 export const getIsAuthenticated = createSelector(
     getToken,
     (token) => !!token
@@ -47,3 +42,8 @@ export const getRoles = createSelector(
     getDecoded,
     (token) => token ? token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] : []
 )
+
+export const getUserId = createSelector(
+    getDecoded,
+    (token) => token ? Number(token.nameid) : 0
+);

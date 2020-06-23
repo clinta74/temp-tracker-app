@@ -9,3 +9,8 @@ export const getUsers = createSelector(
     getStoreState,
     ({ users }) => users
 );
+
+export const getRoles = createSelector(
+    getStoreState,
+    ({ roles }) => roles
+);

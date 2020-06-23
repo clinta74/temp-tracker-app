@@ -1,24 +1,32 @@
 import { UsersState } from './reducers';
 import { User } from '../../api/clients/user';
+import { Role } from '../../api/clients/roles';
 
-export const setReadings = (state: UsersState, users: User[]): UsersState => {
+export const setUsers = (state: UsersState, users: User[]): UsersState => {
   return {
     ...state,
     users: [...users],
   };
 };
 
-export const addReading = (state: UsersState, user: User): UsersState => {
+export const addUser = (state: UsersState, user: User): UsersState => {
   return {
     ...state,
     users: [user, ...state.users]
   }
 }
 
-export const removeReading = (state: UsersState, userId: number): UsersState => {
+export const removeUser = (state: UsersState, userId: number): UsersState => {
   const users = ([...state.users.filter(user => user.userId !== userId)])
   return {
     ...state,
     users,
   }
 }
+
+export const setRoles = (state: UsersState, roles: Role[]): UsersState => {
+  return {
+    ...state,
+    roles: [...roles],
+  };
+};

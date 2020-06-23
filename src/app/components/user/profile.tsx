@@ -4,6 +4,7 @@ import bootbox from 'bootbox';
 
 import { getDecoded, getUserId } from '../../stores/auth/selectors';
 import { Api } from '../../api';
+import { checkPasswordStrength, Strength } from '../../services/password-checker';
 
 interface ChangePassword {
     old: string;
@@ -35,6 +36,15 @@ export const Profile: React.FunctionComponent = () => {
         }
         if (changePassword.new !== changePassword.confirm) {
             bootbox.alert('Your new password does not match', () =>{
+                setChangePassword({
+                    ...changePassword,
+                    new: '',
+                    confirm: '',
+                });
+            })
+        }
+        else if (!checkPasswordStrength(changePassword.new, Strength.medium)) {
+            bootbox.alert('Your new password is not strong enough.  Please use atleast 8 characters, a capital letter with a number or symbol.', () =>{
                 setChangePassword({
                     ...changePassword,
                     new: '',

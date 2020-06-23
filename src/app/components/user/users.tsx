@@ -1,8 +1,8 @@
-import React, { useEffect, HtmlHTMLAttributes } from 'react';
+import React, { useEffect } from 'react';
 import { Api } from '../../api';
 import { AxiosError } from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUsers } from '../../stores/users/actions';
+import { setUsers, setRoles, removeUser } from '../../stores/users/actions';
 import { getUsers } from '../../stores/users/selectors';
 import { Link } from 'react-router-dom';
 
@@ -11,18 +11,33 @@ export const Users: React.FunctionComponent = () => {
     const users = useSelector(getUsers);
 
     useEffect(() => {
-        Api.User.get(1, 100)
+        Api.User.get()
             .then(({ data, headers }) => {
                 const totalReadings = headers['X-Total-Count'];
                 dispatch(setUsers(data));
             })
             .catch((error: AxiosError) => {
-                bootbox.alert(`There was an error attempting to get the readings. ${error.message}`);
+                bootbox.alert(`There was an error attempting to get the users. ${error.message}`);
+            });
+
+        Api.Roles.get()
+            .then(({ data, headers }) => {
+                const totalReadings = headers['X-Total-Count'];
+                dispatch(setRoles(data));
+            })
+            .catch((error: AxiosError) => {
+                bootbox.alert(`There was an error attempting to get the roles. ${error.message}`);
             });
     }, []);
 
     const onClickDelete = (userId: number) => {
-
+        Api.User.remove(userId)
+            .then(() => {
+                dispatch(removeUser(userId));
+            })
+            .catch((error: AxiosError) => {
+                bootbox.alert(`There was an error attempting to delete the user. ${error.message}`);
+            });
     }
 
     return (

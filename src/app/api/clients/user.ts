@@ -1,4 +1,5 @@
 import { apiBase } from '../api-base';
+import { Role } from './roles';
 
 export interface ChangePasswordRequest {
     password: string;
@@ -14,12 +15,6 @@ export interface User {
     roles?: Role[]
 }
 
-export interface Role {
-    roleId: number;
-    name: string;
-    description: string;
-}
-
 export interface NewUser {
     username: string;
     firstname: string;
@@ -27,7 +22,6 @@ export interface NewUser {
     password: string;
     roles: string[];
 }
-
 
 export const get = (page?: number, limit?: number) =>
     apiBase.client.get<User[]>(`users`, { params: { page, limit } });
@@ -38,6 +32,8 @@ export const add = (user: NewUser) =>
 export const update = (user: User) =>
     apiBase.client.put<number>(`users/${user.userId}`, user);
 
+export const remove = (userId: number) =>
+    apiBase.client.delete<number>(`users/${userId}`);
+
 export const changePassword = (userId: number, password: string, oldPassword: string) =>
     apiBase.client.post(`users/${userId}/password`, { password, oldPassword });
-
