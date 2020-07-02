@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel src/index.html --port 3000 --open",
+    "dev": "parcel src/index.html --port 3000 --open --https",
     "build": "parcel build src/index.html",
     "docker:build": "docker build --build-arg API_URL=https://xeams.pollyspeople.net -t candrews74/temp-tracker-app:latest .",
     "docker:push": "docker push candrews74/temp-tracker-app:latest",
