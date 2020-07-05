@@ -1,4 +1,4 @@
-import React, { useState, useEffect, HtmlHTMLAttributes } from 'react';
+import React, { useState } from 'react';
 import { Api } from '../../api';
 import { useDispatch } from 'react-redux';
 import { addReading } from '../../stores/readings/actions';

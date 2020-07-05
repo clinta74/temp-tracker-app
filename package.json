@@ -1,17 +1,17 @@
 {
   "name": "temp-tracker-app",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Temperature Tracker App",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel src/index.html --port 3000 --open --https",
+    "dev": "parcel src/index.html --port 3000 --open",
     "build": "parcel build src/index.html",
-    "docker:build": "docker build --build-arg API_URL=https://xeams.pollyspeople.net -t candrews74/temp-tracker-app:latest .",
+    "docker:build": "docker build --build-arg API_URL=https://temptracker.pollyspeople.net -t candrews74/temp-tracker-app:latest .",
     "docker:push": "docker push candrews74/temp-tracker-app:latest",
     "docker": "npm run docker:build && npm run docker:push",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Clint Andrews",
   "license": "ISC",
   "devDependencies": {
     "@types/bootbox": "^5.2.0",

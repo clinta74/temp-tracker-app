@@ -23,8 +23,18 @@ export interface NewUser {
     roles: string[];
 }
 
+export interface EditUserModel {
+    username: string;
+    firstname: string;
+    lastname: string;
+    roles: string[];
+}
+
 export const get = (page?: number, limit?: number) =>
     apiBase.client.get<User[]>(`users`, { params: { page, limit } });
+
+export const getUser = (userid: number) =>
+    apiBase.client.get<User>(`/users/${userid}`);
 
 export const add = (user: NewUser) =>
     apiBase.client.post<number>(`users`, user);

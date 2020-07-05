@@ -17,7 +17,6 @@ import { Navbar } from './navbar';
 export const App = () => {
 
     const isAuthenticated = useSelector(getIsAuthenticated);
-    const decoded = useSelector(getDecoded);
 
     return (
         <div className="vh-100">
