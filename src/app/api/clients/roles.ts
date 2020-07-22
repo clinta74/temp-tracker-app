@@ -8,4 +8,4 @@ export interface Role {
 }
 
 export const get = (page?: number, limit?: number) =>
-    apiBase.client.get<Role[]>(`users`, { params: { page, limit } });
+    apiBase.client.get<Role[]>(`roles`, { params: { page, limit } });

@@ -7,6 +7,7 @@ import bootbox from 'bootbox';
 import { NewUser } from '../../api/clients/user';
 import { ROLES } from '../../constants';
 import { checkPasswordStrength, Strength } from '../../services/password-checker';
+import { EditRoles } from './edit-roles';
 
 export const AddUser: React.FunctionComponent = () => {
     const history = useHistory();
@@ -50,6 +51,13 @@ export const AddUser: React.FunctionComponent = () => {
         }
     }
 
+    const onChangeRoles = (roles: string[]) => {
+        setUser({
+            ...user,
+            roles,
+        })
+    } 
+
     return (
         <div className="row justify-content-center form-group">
             <div className="col-md-6">
@@ -86,6 +94,7 @@ export const AddUser: React.FunctionComponent = () => {
                             <div className="col">
                                 <div className="form-group">
                                     <label>Roles</label>
+                                    <EditRoles value={user.roles} onChange={onChangeRoles}/>
                                 </div>
                             </div>
                         </div>

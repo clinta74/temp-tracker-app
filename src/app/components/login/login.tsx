@@ -62,16 +62,18 @@ export const Login: React.FunctionComponent = () => {
                                 <input type="password" className="form-control" name="password" ref={passwordInput} />
                             </div>
 
-                            <div className="d-flex">
-                                <button type="submit" className="btn btn-primary" disabled={loading}>
-                                    <span>Login</span>
+                            <div className="d-flex justify-content-center">
+                                <button type="submit" className="btn btn-primary btn-block w-50" disabled={loading}>
+                                    {
+                                        loading &&
+                                        <>
+                                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            Loading...
+                                        </>
+                                        ||
+                                        <span>Login</span>
+                                    }
                                 </button>
-                                {
-                                    loading &&
-                                    <div className="spinner-border ml-4" role="status">
-                                        <span className="sr-only">Loading...</span>
-                                    </div>
-                                }
                             </div>
                         </form>
                     </div>

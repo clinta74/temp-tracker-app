@@ -24,6 +24,7 @@ export interface NewUser {
 }
 
 export interface EditUserModel {
+    userId: number;
     username: string;
     firstname: string;
     lastname: string;
@@ -39,7 +40,7 @@ export const getUser = (userid: number) =>
 export const add = (user: NewUser) =>
     apiBase.client.post<number>(`users`, user);
 
-export const update = (user: User) =>
+export const update = (user: EditUserModel) =>
     apiBase.client.put<number>(`users/${user.userId}`, user);
 
 export const remove = (userId: number) =>

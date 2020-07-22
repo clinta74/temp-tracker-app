@@ -2,27 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { ROLES } from '../../constants';
 import { EditUserModel } from '../../api/clients/user';
 import { Api } from '../../api';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link,  useHistory } from 'react-router-dom';
 import bootbox from 'bootbox';
+import { AxiosError } from 'axios';
+import { EditRoles } from './edit-roles';
 
 export const EditUser: React.FunctionComponent = () => {
     const [user, setUser] = useState<EditUserModel>({
+        userId: 0,
         username: '',
         firstname: '',
         lastname: '',
         roles: [],
     });
 
+    const history = useHistory();
     const params = useParams<{ userid?: string }>()
+    const userid = Number(params.userid);
 
     useEffect(() => {
-        const userid = Number(params.userid);
         if (userid) {
             Api.User.getUser(userid)
-                .then(response => {
+                .then(({data}) => {
                     setUser({
-                        ...response.data,
-                        roles: [],
+                        ...data,
+                        roles: (data.roles && data.roles.map(role => role.name)) ?? [],
                     });
                 })
                 .catch(error => {
@@ -43,10 +47,24 @@ export const EditUser: React.FunctionComponent = () => {
         }
     }
 
-    const onClickAdd: React.MouseEventHandler<HTMLButtonElement> = async event => {
+    const onClickSave: React.MouseEventHandler<HTMLButtonElement> = async event => {
         if (user) {
+            Api.User.update(user)
+            .then(() => {
+                history.push(`/users`);
+            })
+            .catch((error: AxiosError) => {
+                bootbox.alert(`${error.message}`);
+            });;
         }
     }
+
+    const onChangeRoles = (roles: string[]) => {
+        setUser({
+            ...user,
+            roles,
+        })
+    } 
 
     return (
         <div className="row justify-content-center form-group">
@@ -72,12 +90,13 @@ export const EditUser: React.FunctionComponent = () => {
                             <div className="col">
                                 <div className="form-group">
                                     <label>Roles</label>
+                                    <EditRoles value={user.roles} onChange={onChangeRoles}/>
                                 </div>
                             </div>
                         </div>
 
                         <div className="form-group">
-                            <button type="button" className="btn btn-primary mx-1" onClick={onClickAdd}>Save</button>
+                            <button type="button" className="btn btn-primary mx-1" onClick={onClickSave}>Save</button>
                             <Link to="/users" className="btn btn-secondary mx-1">Cancel</Link>
                         </div>
                     </div>
