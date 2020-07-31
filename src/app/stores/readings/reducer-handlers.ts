@@ -22,3 +22,10 @@ export const removeReading = (state: ReadingsState, readingId: string): Readings
     readings,
   }
 }
+
+export const setCurrentPage = (state: ReadingsState, currentPage: number): ReadingsState => {
+  return {
+    ...state,
+    currentPage,
+  };
+};

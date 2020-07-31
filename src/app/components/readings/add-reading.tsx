@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Api } from '../../api';
 import { useDispatch } from 'react-redux';
-import { addReading } from '../../stores/readings/actions';
+import { addReading, setCurrentPage } from '../../stores/readings/actions';
 
 export const AddReading: React.FunctionComponent = () => {
     const dispatch = useDispatch();
@@ -14,6 +14,7 @@ export const AddReading: React.FunctionComponent = () => {
             setNewReading(undefined);
 
             dispatch(addReading(response.data));
+            dispatch(setCurrentPage(1));
         }
     }
 

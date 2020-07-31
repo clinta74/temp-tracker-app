@@ -9,3 +9,14 @@ export const getReadings = createSelector(
     getStoreState,
     ({ readings }) => readings
 );
+
+export const getCurrentPage = createSelector(
+    getStoreState,
+    ({ currentPage }) => currentPage
+
+)
+
+export const getTotalReadings = createSelector(
+    getStoreState,
+    ({ readings }) => readings.length
+);

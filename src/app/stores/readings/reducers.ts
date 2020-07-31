@@ -6,15 +6,18 @@ import { createReducerHandler } from '../createReducerHandler';
 import { Reading } from '../../api/clients/readings';
 
 export interface ReadingsState {
-  readings: Reading[]
+  readings: Reading[];
+  currentPage: number;
 }
 
 const initialState: ReadingsState = {
   readings: [],
+  currentPage: 0,
 };
 
 export const readingsReducer = createReducer(initialState, {
   [getType(Actions.setReadings)]: createReducerHandler(ReducerHandlers.setReadings),
   [getType(Actions.addReading)]: createReducerHandler(ReducerHandlers.addReading),
   [getType(Actions.removeReading)]: createReducerHandler(ReducerHandlers.removeReading),
+  [getType(Actions.setCurrentPage)]: createReducerHandler(ReducerHandlers.setCurrentPage),
 });
