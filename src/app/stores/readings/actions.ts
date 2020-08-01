@@ -5,3 +5,4 @@ export const setReadings = createAction('readings/SET_READINGS', (readings: Read
 export const addReading = createAction('readings/ADD_READING', (reading: Reading) => reading)();
 export const removeReading = createAction('readings/REMOVE_READING', (readingId: string) => readingId)();
 export const setCurrentPage = createAction('readings/SET_CURRENT_PAGE', (currentPage: number) => currentPage)();
+export const setTotalReadings = createAction('readings/SET_TOTAL_READINGS', (totalReadings: number) => totalReadings)();

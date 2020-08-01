@@ -18,5 +18,5 @@ export const getCurrentPage = createSelector(
 
 export const getTotalReadings = createSelector(
     getStoreState,
-    ({ readings }) => readings.length
+    ({ totalReadings }) => totalReadings
 );

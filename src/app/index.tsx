@@ -27,13 +27,13 @@ export const store = createStore(
 
 init(store);
 
-const Root = hot(module)(() => (
+const Root = () => (
     <Provider store={store}>
         <Router history={history}>
             <App />
         </Router>
     </Provider>
-));
+);
 
 const render = async () => {
     ReactDOM.render(<Root />, document.getElementById('root'));

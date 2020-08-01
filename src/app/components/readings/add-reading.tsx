@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import { Api } from '../../api';
-import { useDispatch } from 'react-redux';
-import { addReading, setCurrentPage } from '../../stores/readings/actions';
+import { useDispatch, batch, useSelector } from 'react-redux';
+import { addReading, setCurrentPage, setTotalReadings } from '../../stores/readings/actions';
+import { getTotalReadings } from '../../stores/readings/selectors';
 
 export const AddReading: React.FunctionComponent = () => {
     const dispatch = useDispatch();
     const [newReading, setNewReading] = useState<number | undefined>();
+    const totalReadings = useSelector(getTotalReadings);
 
     const onClickAdd: React.MouseEventHandler<HTMLButtonElement> = async event => {
         if (newReading) {
             const { data } = await Api.Readings.add(newReading);
-            const response = await Api.Readings.getById(data);
             setNewReading(undefined);
 
-            dispatch(addReading(response.data));
-            dispatch(setCurrentPage(1));
+            batch(() => {
+                dispatch(setTotalReadings(totalReadings + 1));
+                dispatch(setCurrentPage(1));
+            });
         }
     }
 
