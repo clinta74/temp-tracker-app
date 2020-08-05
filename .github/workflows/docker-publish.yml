@@ -52,7 +52,9 @@ jobs:
         run: docker build . --file Dockerfile --tag $IMAGE_NAME --build-arg API_URL=$API_URL
 
       - name: Publish Image
-        uses: matootie/github-docker:v3.0.0
+        uses: docker/build-push-action@v1
         with:
-          accessToken: ${{ secrets.DOCKER_KEY }}
-          repository: candrews74/$IMAGE_NAME
+          username: candrews74
+          password: ${{ secrets.DOCKER_KEY }}
+          repository: candrews74/candrews74
+          tag_with_ref: true
