@@ -48,8 +48,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME --build-arg API_URL=$API_URL
+      # - name: Build image
+      #   run: docker build . --file Dockerfile --tag $IMAGE_NAME --build-arg API_URL=$API_URL
 
       - name: Publish Image
         uses: docker/build-push-action@v1
@@ -57,4 +57,5 @@ jobs:
           username: candrews74
           password: ${{ secrets.DOCKER_KEY }}
           repository: candrews74/candrews74
+          build_args: API_URL=$API_URL 
           tag_with_ref: true
