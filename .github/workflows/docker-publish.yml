@@ -35,5 +35,5 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_KEY }}
           repository: candrews74/temp-tracker-app
-          build_args: API_URL=$API_URL 
+          build_args: API_URL=https://temptracker.pollyspeople.net 
           tag_with_ref: true
