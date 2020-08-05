@@ -19,42 +19,20 @@ env:
   API_URL: https://temptracker.pollyspeople.net
 
 jobs:
-  # Run tests.
-  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  # test:
-  # runs-on: ubuntu-latest
-
-  # steps:
-  #    - uses: actions/checkout@v2
-
-  #    - name: Run tests
-  #      run: |
-  #        if [ -f docker-compose.test.yml ]; then
-  #          docker-compose --file docker-compose.test.yml build
-  #          docker-compose --file docker-compose.test.yml run sut
-  #        else
-  #          docker build . --file Dockerfile --build-arg API_URL=$API_URL
-  #        fi
-
-  # Push image to GitHub Packages.
-  # See also https://docs.docker.com/docker-hub/builds/
+  # Push image to Docker Hub.
   push:
     # Ensure test job passes before pushing image.
-    # needs: test
-
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
     steps:
+      - name: Checkout code
       - uses: actions/checkout@v2
-
-      # - name: Build image
-      #   run: docker build . --file Dockerfile --tag $IMAGE_NAME --build-arg API_URL=$API_URL
 
       - name: Publish Image
         uses: docker/build-push-action@v1
         with:
-          username: candrews74
+          username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_KEY }}
           repository: candrews74/candrews74
           build_args: API_URL=$API_URL 
