@@ -54,5 +54,5 @@ jobs:
       - name: Publish Image
         uses: matootie/github-docker:v3.0.0
         with:
-          accessToken: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          accessToken: ${{ secrets.DOCKER_KEY }}
           repository: candrews74/$IMAGE_NAME
