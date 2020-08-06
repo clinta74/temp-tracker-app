@@ -13,11 +13,6 @@ on:
   # Run tests for any PRs.
   pull_request:
 
-env:
-  # TODO: Change variable to your image's name.
-  IMAGE_NAME: temp-tracker-app
-  API_URL: https://temptracker.pollyspeople.net
-
 jobs:
   # Push image to Docker Hub.
   push:
@@ -35,5 +30,5 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_KEY }}
           repository: candrews74/temp-tracker-app
-          build_args: API_URL=https://temptracker.pollyspeople.net 
+          build_args: API_URL=https://temptracker.pollyspeople.net,GRAPH_URL=https://temptracker.pollyspeople.net/graph
           tag_with_ref: true
