@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { createBrowserHistory } from 'history';
-import { hot } from 'react-hot-loader';
 
 // Bootstrap imports
 import $ from 'jquery';
