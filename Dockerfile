@@ -7,6 +7,9 @@ ADD . /build
 ARG API_URL
 ENV API_URL=${API_URL}
 
+ARG GRAPH_URL
+ENV GRAPH_URL=${GRAPH_URL}
+
 WORKDIR /build
 
 RUN npm ci && \
