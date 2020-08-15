@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "parcel src/index.html --port 3000 --open",
     "build": "parcel build src/index.html",
-    "docker:build": "docker build --build-arg API_URL=https://temptracker.pollyspeople.net -t candrews74/temp-tracker-app:latest .",
+    "docker:build": "docker build --build-arg API_URL=https://temptracker.pollyspeople.net  --build-arg GRAPH_URL=https://temptracker.pollyspeople.net/graph -t candrews74/temp-tracker-app:latest .",
     "docker:push": "docker push candrews74/temp-tracker-app:latest",
     "docker": "npm run docker:build && npm run docker:push",
     "test": "echo \"Error: no test specified\" && exit 1"
