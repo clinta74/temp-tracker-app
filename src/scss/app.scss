@@ -11,3 +11,15 @@
 .vh-100 {
   height: 100vh important;
 }
+
+.loading-position {
+  z-index: 10;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.loading-size {
+  width: 3rem;
+  height: 3rem;
+}

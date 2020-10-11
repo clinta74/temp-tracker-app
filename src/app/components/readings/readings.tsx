@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch, batch } from 'react-redux';
 import moment from 'moment';
 import bootbox from 'bootbox';
 import { AxiosError } from 'axios';
 import { Pager } from 'react-ts-pager';
+import classNames from 'classnames';
 
 import { Api } from '../../api';
 
@@ -18,8 +19,11 @@ export const Readings: React.FunctionComponent = () => {
     const totalReadings = useSelector(getTotalReadings)
     const itemsPerPage = 10;
 
+    const [ isLoading, setIsLoading ] = useState(false);
+
     useEffect(() => {
         if (currentPage) {
+            setIsLoading(true);
             Api.Readings.get(currentPage, itemsPerPage)
                 .then(({ data, headers }) => {
                     const totalReadings = Number(headers['x-total-count']) || data.length;
@@ -30,6 +34,9 @@ export const Readings: React.FunctionComponent = () => {
                 })
                 .catch((error: AxiosError) => {
                     bootbox.alert(`There was an error attempting to get the readings. ${error.message}`);
+                })
+                .finally(() => {
+                    setIsLoading(false);
                 });
         }
     }, [currentPage, totalReadings, itemsPerPage]);
@@ -57,41 +64,50 @@ export const Readings: React.FunctionComponent = () => {
     return (
         <div>
             <AddReading />
-            <table className="table">
-                <colgroup>
-                    <col span={2} />
-                    <col width={1} />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Temp</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        readings.map(reading =>
-                            <tr key={reading.readingId}>
-                                <td>{moment(`${reading.taken}Z`).format('lll')}</td>
-                                <td>{reading.value}</td>
-                                <td>
-                                    <div className="btn btn-danger" onClick={() => onClickDelete(reading.readingId)}>Remove</div>
-                                </td>
-                            </tr>
-                        )
-                    }
-                </tbody>
-            </table>
-            <div className="d-flex justify-content-end">
-                <div>
-                    <Pager
-                        currentPage={currentPage}
-                        total={totalReadings}
-                        itemsPerPage={itemsPerPage}
-                        visiblePages={4} // Number of page numbered buttons to show.
-                        onPageChanged={(currentPage) => dispatch(setCurrentPage(currentPage))} // Callback that receivce the page number that has been clicked.
-                    />
+            <div className="position-relative">
+                <div className={classNames('position-absolute loading-position d-none', {
+                    'd-inline-block': isLoading
+                })} >
+                    <div className="spinner-border loading-size" role="status">
+                    <span className="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <table className="table">
+                    <colgroup>
+                        <col span={2} />
+                        <col width={1} />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Temp</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            readings.map(reading =>
+                                <tr key={reading.readingId}>
+                                    <td>{moment(`${reading.taken}Z`).format('lll')}</td>
+                                    <td>{reading.value}</td>
+                                    <td>
+                                        <div className="btn btn-danger" onClick={() => onClickDelete(reading.readingId)}>Remove</div>
+                                    </td>
+                                </tr>
+                            )
+                        }
+                    </tbody>
+                </table>
+                <div className="d-flex justify-content-end">
+                    <div>
+                        <Pager
+                            currentPage={currentPage}
+                            total={totalReadings}
+                            itemsPerPage={itemsPerPage}
+                            visiblePages={4} // Number of page numbered buttons to show.
+                            onPageChanged={(currentPage) => dispatch(setCurrentPage(currentPage))} // Callback that receivce the page number that has been clicked.
+                        />
+                    </div>
                 </div>
             </div>
         </div>

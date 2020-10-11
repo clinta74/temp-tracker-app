@@ -1,6 +1,6 @@
 {
   "name": "temp-tracker-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Temperature Tracker App",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/bootbox": "^5.2.0",
+    "@types/classnames": "^2.2.10",
     "@types/js-cookie": "^2.2.6",
     "@types/jwt-decode": "^2.2.1",
     "@types/lodash": "^4.14.150",
@@ -31,6 +32,7 @@
     "@hot-loader/react-dom": "^16.13.0",
     "axios": "^0.19.2",
     "bootbox": "^5.4.0",
+    "classnames": "^2.2.6",
     "connected-react-router": "^6.8.0",
     "immutable": "^4.0.0-rc.12",
     "jquery": "^3.5.0",
