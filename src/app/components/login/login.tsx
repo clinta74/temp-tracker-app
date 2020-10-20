@@ -67,8 +67,8 @@ export const Login: React.FunctionComponent = () => {
                                     {
                                         loading &&
                                         <>
-                                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                            Loading...
+                                            <span>Loading</span>
+                                            <span className="spinner-border spinner-border-sm ml-1" role="status" aria-hidden="true"></span>
                                         </>
                                         ||
                                         <span>Login</span>

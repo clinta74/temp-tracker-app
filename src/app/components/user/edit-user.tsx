@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { ROLES } from '../../constants';
 import { EditUserModel } from '../../api/clients/user';
 import { Api } from '../../api';
-import { useParams, Link,  useHistory } from 'react-router-dom';
+import { Link,  RouteComponentProps,  useHistory } from 'react-router-dom';
 import bootbox from 'bootbox';
 import { AxiosError } from 'axios';
 import { EditRoles } from './edit-roles';
 
-export const EditUser: React.FunctionComponent = () => {
+interface EditUserProps {
+    userid: number;
+}
+
+export const EditUser: React.FunctionComponent<EditUserProps> = ({ userid }) => {
     const [user, setUser] = useState<EditUserModel>({
         userId: 0,
         username: '',
@@ -17,8 +21,6 @@ export const EditUser: React.FunctionComponent = () => {
     });
 
     const history = useHistory();
-    const params = useParams<{ userid?: string }>()
-    const userid = Number(params.userid);
 
     useEffect(() => {
         if (userid) {
