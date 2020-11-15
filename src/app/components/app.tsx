@@ -25,10 +25,10 @@ export const App = () => {
                 <Switch>
                     <AuthorizedRoute path="/dashboard" isAuthorized={isAuthenticated} to="/login" render={() => <Dashboard/>} />
                     <AuthorizedRoute path="/readings" isAuthorized={isAuthenticated} to="/dashboard" render={() => <Readings/>} />
-                    <AuthorizedRoute path="/users" exact isAuthorized={isAuthenticated} to="/dashboard" roles={[ROLES.ADMIN]} render={() => <Users />} />
+                    <AuthorizedRoute path="/users" exact isAuthorized={isAuthenticated} to="/dashboard" roles={[ROLES.ADMIN]} render={() => <Users/>} />
                     <AuthorizedRoute path="/users/add" isAuthorized={isAuthenticated} to="/dashboard" roles={[ROLES.ADMIN]} render={() => <AddUser/>} />
                     <AuthorizedRoute path="/users/:userid" isAuthorized={isAuthenticated} to="/dashboard" roles={[ROLES.ADMIN]} render={(props: RouteComponentProps<{userid: string}>) => <EditUser userid={Number(props.match.params.userid)} />} />
-                    <AuthorizedRoute path="/profile" isAuthorized={isAuthenticated} to="/dashboard" render={() => Profile} />
+                    <AuthorizedRoute path="/profile" isAuthorized={isAuthenticated} to="/dashboard" render={() => <Profile/>} />
                     <AuthorizedRoute path="/logout" isAuthorized={isAuthenticated} to="/login" component={Logout} />
                     <Route path="/login" render={() => <Login/>}/>
                     <Redirect to="/dashboard" />
